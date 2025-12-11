@@ -16,7 +16,7 @@
 
             if (chars == null || chars.length == 0) {
                 throw new IllegalArgumentException("The char array cannot be null or empty");
-            }
+            } else{
 
             StringBuilder builder = new StringBuilder();
             int count = 1;
@@ -34,5 +34,7 @@
             builder.append(chars[chars.length - 1]).append(count);
 
             return builder.toString();
+
+            }
         }
     }
