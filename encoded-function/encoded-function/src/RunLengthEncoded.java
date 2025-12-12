@@ -1,40 +1,40 @@
+public class RunLengthEncoded {
+    public static void main(String[] args) throws Exception {
 
-    public class RunLengthEncoded {
+        String rez1 = encode("aaaabbbccc".toCharArray());
+        System.out.println(rez1);
+        String rez2 = encode("abbbcdddd".toCharArray());
+        System.out.println(rez2);
+        String rez3 = encode("wwwwaaadexxxxxx".toCharArray());
+        System.out.println(rez3);
+        String rez4 = encode("33334444555666777".toCharArray());
+        System.out.println(rez4);
+        //encode("".toCharArray());
+        //encode(" ".toCharArray());
+    }
 
-        public static void main(String[] args) {
-            String rez1 = encode("aaaabbbccc".toCharArray());
-            System.out.println(rez1);
+    public static String encode(char[] chars) throws Exception {
 
-            String rez2 = encode("abbbcdddd".toCharArray());
-            System.out.println(rez2);
+        String s=String.valueOf(chars);
+        if (s.isBlank()) {
+            throw new IllegalArgumentException("The chars must not be blank or null");
+        } else {
 
-            String rezNum = encode("3333344442222".toCharArray());
-            System.out.println(rezNum);
-        }
-
-        public static String encode(char[] chars) {
-
-            if (chars == null || chars.length == 0) {
-                throw new IllegalArgumentException("The char array cannot be null or empty");
-            } else{
-
-            StringBuilder builder = new StringBuilder();
             int count = 1;
-
-
-            for (int i = 1; i < chars.length; i++) {
-                if (chars[i] == chars[i - 1]) {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < chars.length - 1; i++) {
+                if (chars[i] == chars[i + 1]) {
                     count++;
                 } else {
-                    builder.append(chars[i - 1]).append(count);
+                    stringBuilder.append(chars[i]).append(count);
                     count = 1;
                 }
             }
+            stringBuilder.append(chars[chars.length - 1]).append(count);
+            return stringBuilder.toString();
 
-            builder.append(chars[chars.length - 1]).append(count);
-
-            return builder.toString();
-
-            }
         }
+
     }
+
+}
