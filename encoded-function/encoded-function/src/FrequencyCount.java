@@ -2,33 +2,36 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FrequencyCount {
+    public static void main(String[] args) throws Exception {
 
-    public static void main(String[] args) {
-        String rez1 = encode("aaaabbbccc".toCharArray());
+        String rez1 = encode("aaaabbbbccccddd".toCharArray());
         System.out.println(rez1);
-
-        String rez2 = encode("abbbcdddd".toCharArray());
+        String rez2 = encode("wwwwxxxrrrbb".toCharArray());
         System.out.println(rez2);
-
-        String rezNum = encode("3333344442222".toCharArray());
-        System.out.println(rezNum);
+        String rez3 = encode("33334444555666777".toCharArray());
+        System.out.println(rez3);
+        encode("".toCharArray());
+        encode(" ".toCharArray());
     }
 
-    public static String encode(char[] chars) {
-        if (chars == null || chars.length == 0) {
-            throw new IllegalArgumentException("The char array cannot be null or empty");
+    public static String encode(char[] chars) throws Exception {
+
+        String s=String.valueOf(chars);
+        if (s.isBlank()) {
+            throw new IllegalArgumentException("The chars must not be blank or null");
         } else {
-            Map<Character, Integer> map = new HashMap<>();
-            for (char c : chars) {
-                map.put(c, map.getOrDefault(c, 0) + 1);
-            }
 
-            StringBuilder sb = new StringBuilder();
-            for (Map.Entry<Character, Integer> entry : map.entrySet()) {
-                sb.append(entry.getKey()).append(entry.getValue());
-            }
+           Map<Character, Integer> map = new HashMap<>();
+           for( char c : chars ) {
+               map.put(c,map.getOrDefault(c,0)+1);
+           }
 
-            return sb.toString();
+           StringBuilder stringBuilder= new StringBuilder();
+           for(Map.Entry<Character,Integer> entry:map.entrySet()) {
+               stringBuilder.append(entry.getKey()).append(entry.getValue());
+           }
+            return stringBuilder.toString();
         }
+
     }
 }
